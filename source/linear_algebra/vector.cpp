@@ -1,4 +1,5 @@
 #include <math.h>
+#include <cmath>
 #include "vector.hpp"
 
 namespace cpp_utils::linalg {

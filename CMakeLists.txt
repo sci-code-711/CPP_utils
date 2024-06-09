@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.14)
 project(source)
 
 # GoogleTest requires at least C++14
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -17,15 +17,15 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 add_executable(
-  vector_test
+  testBuild
   test/linear_algebra/vector_unittest.cpp
   source/linear_algebra/vector.cpp
 )
 
 target_link_libraries(
-  vector_test
+  testBuild
   GTest::gtest_main
 )
 
 include(GoogleTest)
-gtest_discover_tests(vector_test)
+gtest_discover_tests(testBuild)

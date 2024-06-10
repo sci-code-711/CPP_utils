@@ -9,7 +9,7 @@ namespace cpp_utils::linalg {
 class Matrix{
     public:
         float xx, xy, xz, yx, yy, yz, zx, zy, zz;
-        inline Matrix() : xx(0), xy(0), xz(0), yx(0), yy(0), yz(0), zx(0), zy(0), zz(0) {};
+        inline Matrix() : xx(1), xy(0), xz(0), yx(0), yy(1), yz(0), zx(0), zy(0), zz(1) {};
         Matrix(int xx, int xy, int xz, int yx, int yy, int yz, int zx, int zy, int zz);
         Matrix(float xx, float xy, float xz, float yx, float yy, float yz, float zx, float zy, float zz);
         Matrix(double xx, double xy, double xz, double yx, double yy, double yz, double zx, double zy, double zz);
@@ -29,8 +29,8 @@ class Matrix{
         Matrix operator*(const Matrix & that) const;
         Vector operator*(const Vector & that) const; 
         Matrix operator^(const int & that) const;
-        Matrix rowReduce();
-        Matrix inverse();
+        Matrix rowReduce() const;
+        Matrix inverse() const;
     private:
         float precision = 0.0001;
 };

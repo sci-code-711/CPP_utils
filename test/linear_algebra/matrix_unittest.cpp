@@ -4,21 +4,38 @@
 
 TEST(MatrixTest, DefaultInitTest) {
     cpp_utils::linalg::Matrix iMat;
-    EXPECT_EQ(iMat.xx, 1); EXPECT_EQ(iMat.xy, 0); EXPECT_EQ(iMat.xz, 0);
-    EXPECT_EQ(iMat.yx, 0); EXPECT_EQ(iMat.yy, 1); EXPECT_EQ(iMat.yz, 0);
-    EXPECT_EQ(iMat.zx, 0); EXPECT_EQ(iMat.zy, 0); EXPECT_EQ(iMat.zz, 1);
+    EXPECT_EQ(iMat.xx, 1);
+    EXPECT_EQ(iMat.xy, 0);
+    EXPECT_EQ(iMat.xz, 0);
+    EXPECT_EQ(iMat.yx, 0);
+    EXPECT_EQ(iMat.yy, 1);
+    EXPECT_EQ(iMat.yz, 0);
+    EXPECT_EQ(iMat.zx, 0);
+    EXPECT_EQ(iMat.zy, 0);
+    EXPECT_EQ(iMat.zz, 1);
 }
 
 TEST(MatrixTest, InitTest) {
     cpp_utils::linalg::Matrix Mat1(0, 1, 2, 3, 4, 5, 6, 7, 8);
-    EXPECT_EQ(Mat1.xx, 0); EXPECT_EQ(Mat1.xy, 1); EXPECT_EQ(Mat1.xz, 2);
-    EXPECT_EQ(Mat1.yx, 3); EXPECT_EQ(Mat1.yy, 4); EXPECT_EQ(Mat1.yz, 5);
-    EXPECT_EQ(Mat1.zx, 6); EXPECT_EQ(Mat1.zy, 7); EXPECT_EQ(Mat1.zz, 8);
+    EXPECT_EQ(Mat1.xx, 0);
+    EXPECT_EQ(Mat1.xy, 1);
+    EXPECT_EQ(Mat1.xz, 2);
+    EXPECT_EQ(Mat1.yx, 3);
+    EXPECT_EQ(Mat1.yy, 4);
+    EXPECT_EQ(Mat1.yz, 5);
+    EXPECT_EQ(Mat1.zx, 6);
+    EXPECT_EQ(Mat1.zy, 7);
+    EXPECT_EQ(Mat1.zz, 8);
 }
 
 TEST(MatrixTest, DetTest) {
+    cpp_utils::linalg::Matrix iMat;
     cpp_utils::linalg::Matrix Mat1(2, 0, 0, 0, 2, 0, 0, 0, 2);
+    cpp_utils::linalg::Matrix Mat2(0, 1, 2, 3, 4, 5, 6, 7, 8);
+    
+    EXPECT_NEAR(iMat.det(), 1, 0.0001);
     EXPECT_NEAR(Mat1.det(), 8, 0.0001);
+    EXPECT_NEAR(Mat2.det(), 0, 0.0001);
 }
 
 TEST(MatrixTest, EqualityTest) {

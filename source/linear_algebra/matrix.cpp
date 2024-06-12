@@ -70,9 +70,9 @@ Matrix Matrix::inverse() const {
     if(this->det() == 0) {
         return Matrix(0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
-    return Matrix( (1/det()) * ((yy * zz) - (zy * yz)), -(1/det()) * ((xy * zz) - (zy * xz)),  (1/det()) * ((xy * yz) - (yy * xz)),
-                  -(1/det()) * ((yx * zz) - (zx * yz)),  (1/det()) * ((xx * zz) - (zx * xz)), -(1/det()) * ((xx * yz) - (yx * xz)),
-                   (1/det()) * ((yx * zy) - (zx * yy)), -(1/det()) * ((xx * zy) - (zx * xy)),  (1/det()) * ((xx * yy) - (yx * xy)));
+    return Matrix( ((yy * zz) - (zy * yz)), -((xy * zz) - (zy * xz)),  ((xy * yz) - (yy * xz)),
+                  -((yx * zz) - (zx * yz)),  ((xx * zz) - (zx * xz)), -((xx * yz) - (yx * xz)),
+                   ((yx * zy) - (zx * yy)), -((xx * zy) - (zx * xy)),  ((xx * yy) - (yx * xy))) * (1/det());
 }
 
 }

@@ -13,7 +13,7 @@ class Matrix{
         Matrix(int xx, int xy, int xz, int yx, int yy, int yz, int zx, int zy, int zz);
         Matrix(float xx, float xy, float xz, float yx, float yy, float yz, float zx, float zy, float zz);
         Matrix(double xx, double xy, double xz, double yx, double yy, double yz, double zx, double zy, double zz);
-        float mod() const;
+        float det() const;
 
         bool operator==(const Matrix & that) const;
         inline bool operator!=(const Matrix & that) const {
@@ -27,9 +27,7 @@ class Matrix{
         inline Matrix operator/(const int & that) const {return *this / float(that);};
         inline Matrix operator-() {return *this * -1;};
         Matrix operator*(const Matrix & that) const;
-        Vector operator*(const Vector & that) const; 
-        Matrix operator^(const int & that) const;
-        Matrix rowReduce() const;
+        Vector operator*(const Vector & that) const;
         Matrix inverse() const;
     private:
         float precision = 0.0001;

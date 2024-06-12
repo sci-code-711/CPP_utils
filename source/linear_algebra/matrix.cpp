@@ -62,17 +62,25 @@ Matrix Matrix::operator*(const Matrix & that) const {
                   (zx * that.xx) + (zy * that.yx) + (zz * that.zx), (zx * that.xy) + (zy * that.yy) + (zz * that.zy), (zx * that.xz) + (zy * that.yz) + (zz * that.zz));
 }
 
+cpp_utils::linalg::Matrix cpp_utils::linalg::operator*(float that, const cpp_utils::linalg::Matrix & those) {
+    return those * that;
+}
+
 Vector Matrix::operator*(const Vector & that) const {
     return Vector((xx * that.x) + (xy * that.y) + (xz * that.z), (yx * that.x) + (yy * that.y) + (yz * that.z), (zx * that.x) + (zy * that.y) + (zz * that.z));
+}
+
+cpp_utils::linalg::Vector cpp_utils::linalg::operator*(cpp_utils::linalg::Vector that, const cpp_utils::linalg::Matrix &those) {
+    return Vector((that.x * those.xx) + (that.y * those.yx) + (that.z * those.zx), (that.x * those.xy) + (that.y * those.yy) + (that.z * those.zy), (that.x * those.xz) + (that.y * those.yz) + (that.z * those.zz));
 }
 
 Matrix Matrix::inverse() const {
     if(this->det() == 0) {
         return Matrix(0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
-    return Matrix( ((yy * zz) - (zy * yz)), -((xy * zz) - (zy * xz)),  ((xy * yz) - (yy * xz)),
-                  -((yx * zz) - (zx * yz)),  ((xx * zz) - (zx * xz)), -((xx * yz) - (yx * xz)),
-                   ((yx * zy) - (zx * yy)), -((xx * zy) - (zx * xy)),  ((xx * yy) - (yx * xy))) * (1/det());
+    return (1/det()) * Matrix( ((yy * zz) - (zy * yz)), -((xy * zz) - (zy * xz)),  ((xy * yz) - (yy * xz)),
+                              -((yx * zz) - (zx * yz)),  ((xx * zz) - (zx * xz)), -((xx * yz) - (yx * xz)),
+                               ((yx * zy) - (zx * yy)), -((xx * zy) - (zx * xy)),  ((xx * yy) - (yx * xy)));
 }
 
 }

@@ -84,10 +84,13 @@ TEST(MatrixTest, MultiplicationTest) {
     cpp_utils::linalg::Matrix Exp1(0, -2, -4, -6, -8, 2, 4, 6, 8);
     EXPECT_EQ(Mat1 * int(-2), Exp1) << "Failed to multiply by negative int";
     EXPECT_EQ(Mat1 * float(-2), Exp1) << "Failed to multiply by negative float";
+    EXPECT_EQ(int(-2) * Mat1, Exp1) << "Failed to multiply by negative int";
+    EXPECT_EQ(float(-2) * Mat1, Exp1) << "Failed to multiply by negative float";
 
     cpp_utils::linalg::Matrix Exp2(0.0, 0.5, 1.0, 1.5, 2.0, -0.5, -1.0, -1.5, -2.0);
     cpp_utils::linalg::Matrix res = Mat1 * float(0.5);
     EXPECT_EQ(Mat1 * float(0.5), Exp2) << "Failed to multiply by decimal value";
+    EXPECT_EQ(float(0.5) * Mat1, Exp2) << "Failed to multiply by decimal value";
 }
 
 TEST(MatrixTest, DivisionTest) {
@@ -115,10 +118,13 @@ TEST(MatrixTest, MatrixMultiplicationTest) {
 TEST(MatrixTest, VectorMultiplicationTest) {
     cpp_utils::linalg::Matrix Mat1(1, 1, 0, 0, 1, 0, 0, 0, 0);
     cpp_utils::linalg::Vector Vec1(0, 1, 2);
-    cpp_utils::linalg::Vector Vec2(1, 1, 0);
+    cpp_utils::linalg::Vector Vec2(1, 0, 2);
+    cpp_utils::linalg::Vector Vec3(1, 1, 0);
 
-    EXPECT_TRUE(Mat1 * Vec1 == Vec2);
-    EXPECT_FALSE(Mat1 * Vec2 == Vec1);
+    EXPECT_TRUE(Mat1 * Vec1 == Vec3);
+    EXPECT_FALSE(Mat1 * Vec3 == Vec1);
+    EXPECT_TRUE(Vec2 * Mat1 == Vec3);
+    EXPECT_FALSE(Vec3 * Mat1 == Vec2);
 }
 
 TEST(MatrixTest, InverseTest) {

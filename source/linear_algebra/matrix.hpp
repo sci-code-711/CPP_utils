@@ -33,6 +33,10 @@ class Matrix{
         float precision = 0.0001;
 };
 
+Vector operator*(Vector that, const Matrix & those);
+Matrix operator*(float that, const Matrix & those);
+inline Matrix operator*(int that, const Matrix & those) {return float(that) * those;};
+
 }
 
 #endif

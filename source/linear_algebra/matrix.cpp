@@ -56,14 +56,14 @@ namespace cpp_utils::linalg {
         return Matrix(xx * that, xy * that, xz * that, yx * that, yy * that, yz * that, zx * that, zy * that, zz * that);
     }
     
+    Matrix operator*(float that, const Matrix & those) {
+        return those * that;
+    }
+    
     Matrix Matrix::operator*(const Matrix & that) const {
         return Matrix((xx * that.xx) + (xy * that.yx) + (xz * that.zx), (xx * that.xy) + (xy * that.yy) + (xz * that.zy), (xx * that.xz) + (xy * that.yz) + (xz * that.zz),
                       (yx * that.xx) + (yy * that.yx) + (yz * that.zx), (yx * that.xy) + (yy * that.yy) + (yz * that.zy), (yx * that.xz) + (yy * that.yz) + (yz * that.zz),
                       (zx * that.xx) + (zy * that.yx) + (zz * that.zx), (zx * that.xy) + (zy * that.yy) + (zz * that.zy), (zx * that.xz) + (zy * that.yz) + (zz * that.zz));
-    }
-    
-    Matrix operator*(float that, const Matrix & those) {
-        return those * that;
     }
     
     Vector Matrix::operator*(const Vector & that) const {

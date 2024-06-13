@@ -58,17 +58,17 @@ TEST(MatrixTest, AdditionTest) {
     cpp_utils::linalg::Matrix Mat1(1, 0, 1, 0, 1, 0, 1, 0, 1);
     cpp_utils::linalg::Matrix Mat2(0, 1, 0, 1, 0, 1, 0, 1, 0);
 
-    cpp_utils::linalg::Matrix ExpMat(1, 1, 1, 1, 1, 1, 1, 1, 1);
-    EXPECT_EQ(Mat1 + Mat2, ExpMat);
+    cpp_utils::linalg::Matrix Exp1(1, 1, 1, 1, 1, 1, 1, 1, 1);
+    EXPECT_EQ(Mat1 + Mat2, Exp1);
 }
 
 TEST(MatrixTest, SubtractionTest) {
     cpp_utils::linalg::Matrix Mat1(1, 0, 1, 0, 1, 0, 1, 0, 1);
     cpp_utils::linalg::Matrix Mat2(0, 1, 0, 1, 0, 1, 0, 1, 0);
 
-    cpp_utils::linalg::Matrix ExpMat(1, -1, 1, -1, 1, -1, 1, -1, 1);
-    EXPECT_EQ(Mat1 - Mat2, ExpMat);
-    EXPECT_EQ(Mat2 - Mat1, -ExpMat);
+    cpp_utils::linalg::Matrix Exp1(1, -1, 1, -1, 1, -1, 1, -1, 1);
+    EXPECT_EQ(Mat1 - Mat2, Exp1);
+    EXPECT_EQ(Mat2 - Mat1, -Exp1);
 }
 
 TEST(MatrixTest, NegativeTest) {

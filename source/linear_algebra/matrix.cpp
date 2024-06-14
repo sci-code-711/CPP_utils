@@ -76,7 +76,7 @@ namespace cpp_utils::linalg {
     
     Matrix Matrix::inverse() const {
         if(this->det() == 0) {
-            return Matrix(0, 0, 0, 0, 0, 0, 0, 0, 0);
+            throw std::exception("No inverse due to zero value of determinant.");
         }
         return (1/det()) * Matrix( ((yy * zz) - (zy * yz)), -((xy * zz) - (zy * xz)),  ((xy * yz) - (yy * xz)),
                                   -((yx * zz) - (zx * yz)),  ((xx * zz) - (zx * xz)), -((xx * yz) - (yx * xz)),

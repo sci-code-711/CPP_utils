@@ -134,8 +134,8 @@ TEST(MatrixTest, InverseTest) {
     cpp_utils::linalg::Matrix Mat4(0, 0, 1, 0, 1, 0, -1, 0, 0);
     cpp_utils::linalg::Matrix Mat5(0, 0, 1, 0, 1, 0, 1, 0, 0);
 
-    EXPECT_THROW(Mat1.inverse(), char);
-    EXPECT_THROW(Mat2.inverse(), char);
+    EXPECT_THROW(Mat1.inverse(), std::exception);
+    EXPECT_THROW(Mat2.inverse(), std::exception);
     EXPECT_TRUE(Mat3.inverse() == Mat4);
     EXPECT_TRUE(Mat4.inverse() == Mat3);
     EXPECT_TRUE(Mat5.inverse() == Mat5);

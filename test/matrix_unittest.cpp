@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include <math.h>
-#include "../../source/linear_algebra/matrix.hpp"
+#include "../source/matrix.hpp"
 
 TEST(MatrixTest, DefaultInitTest) {
     cpp_utils::Matrix iMat;

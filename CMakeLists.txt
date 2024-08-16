@@ -18,11 +18,11 @@ enable_testing()
 
 add_executable(
   testBuild
-  test/linear_algebra/vector_unittest.cpp
-  source/linear_algebra/vector.cpp
-  test/linear_algebra/matrix_unittest.cpp
-  source/linear_algebra/matrix.cpp
-  source/quaternions/quaternion.cpp
+  test/vector_unittest.cpp
+  source/vector.cpp
+  test/matrix_unittest.cpp
+  source/matrix.cpp
+  source/quaternion.cpp
 )
 
 target_link_libraries(

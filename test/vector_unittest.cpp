@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include <math.h>
-#include "../../source/linear_algebra/vector.hpp"
+#include "../source/vector.hpp"
 
 TEST(VectorTest, DefaultInitTest) {
     cpp_utils::Vector NullVec;

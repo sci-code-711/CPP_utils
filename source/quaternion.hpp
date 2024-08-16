@@ -2,7 +2,7 @@
 #define QUATERNION_HPP
 
 #include <cmath>
-#include "../linear_algebra/vector.hpp"
+#include "vector.hpp"
 
 namespace cpp_utils {
 

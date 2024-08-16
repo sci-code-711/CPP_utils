@@ -49,7 +49,4 @@ namespace cpp_utils {
         return Vector(result.x, result.y, result.z);
     };
 
-
-
-
 }

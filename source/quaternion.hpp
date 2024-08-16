@@ -8,16 +8,12 @@ namespace cpp_utils {
 
 class Quaternion {
     public:
-        const double w, x, y, z;
+        double w, x, y, z;
         inline Quaternion() : w(0), x(0), y(0), z(0) {};
         inline Quaternion(double w, double x, double y, double z):
             w(w),  x(x), y(y), z(z) {};
         Quaternion(double angle, Vector axis);
         double mod() const;
-
-        inline Quaternion static fromAngle(double rotation) {
-            return Quaternion(cos(rotation / 2), 0, 0, sin(rotation / 2));
-        };
 
         bool operator==(const Quaternion & that) const;
         inline bool operator!=(const Quaternion & that) const {
@@ -37,7 +33,7 @@ class Quaternion {
 
 Vector operator*(const Vector vec, const Quaternion quat);
 
-Vector rotate(Vector vec, Quaternion quat) {
+inline Vector rotate(Vector vec, Quaternion quat) {
     return quat * vec * - quat / quat.mod();
 };
 

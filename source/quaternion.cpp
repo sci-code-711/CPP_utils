@@ -15,6 +15,10 @@ namespace cpp_utils {
         return sqrt((w * w) + (x * x) + (y * y) + (z * z));
     };
 
+    Quaternion Quaternion::conj() const {
+        return {w, -x, -y, -z};
+    }
+
     Quaternion Quaternion::operator*(const double & that) const {
         return Quaternion(w * that, x * that, y * that, z * that);
     };

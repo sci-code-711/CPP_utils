@@ -1,6 +1,8 @@
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
 
+#include <iostream>
+
 namespace cpp_utils {
 
 class Vector{
@@ -23,6 +25,10 @@ class Vector{
         Vector operator^(const Vector & that) const;
     private:
         double precision = 0.0001;
+};
+
+inline std::ostream &operator<<(std::ostream &os, Vector const &vec) {
+    return os << "Vec(" << vec.x << ", " << vec.y << ", "<< vec.z << ")\n";
 };
 
 }

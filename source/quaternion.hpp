@@ -2,6 +2,7 @@
 #define QUATERNION_HPP
 
 #include <cmath>
+#include <iostream>
 #include "vector.hpp"
 
 namespace cpp_utils {
@@ -14,6 +15,7 @@ class Quaternion {
             w(w),  x(x), y(y), z(z) {};
         Quaternion(double angle, Vector axis);
         double mod() const;
+        Quaternion conj() const;
 
         bool operator==(const Quaternion & that) const;
         inline bool operator!=(const Quaternion & that) const {
@@ -34,7 +36,11 @@ class Quaternion {
 Vector operator*(const Vector vec, const Quaternion quat);
 
 inline Vector rotate(Vector vec, Quaternion quat) {
-    return quat * vec * - quat / quat.mod();
+    return quat.conj() * vec * quat / quat.mod();
+};
+
+inline std::ostream &operator<<(std::ostream &os, Quaternion const &quat) {
+    return os << "Quat(" << quat.w << ", " << quat.x << ", " << quat.y << ", "<< quat.z << ")\n";
 };
 
 }

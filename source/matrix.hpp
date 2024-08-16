@@ -1,7 +1,7 @@
 #ifndef MATRIX_HPP
 #define MATRIX_HPP
 
-#include <exception>
+#include <stdexcept>
 #include "vector.hpp"
 
 namespace cpp_utils {

@@ -19,10 +19,13 @@ enable_testing()
 add_executable(
   testBuild
   test/vector_unittest.cpp
+  source/vector.hpp
   source/vector.cpp
   test/matrix_unittest.cpp
+  source/matrix.hpp
   source/matrix.cpp
   test/quaternion_unittest.cpp
+  source/quaternion.hpp
   source/quaternion.cpp
 )
 

@@ -22,6 +22,7 @@ add_executable(
   source/vector.cpp
   test/matrix_unittest.cpp
   source/matrix.cpp
+  test/quaternion_unittest.cpp
   source/quaternion.cpp
 )
 

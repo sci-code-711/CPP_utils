@@ -4,6 +4,13 @@
 
 namespace cpp_utils {
 
+    Quaternion::Quaternion(double angle, Vector axis):
+        w(cos(angle / 2)),
+        x(axis.x / axis.mod() * sin(angle / 2)),
+        y(axis.y / axis.mod() * sin(angle / 2)),
+        z(axis.z / axis.mod() * sin(angle / 2))
+        {};
+
     double Quaternion::mod() const {
         return sqrt((w * w) + (x * x) + (y * y) + (z * z));
     };

@@ -22,6 +22,7 @@ add_executable(
   source/linear_algebra/vector.cpp
   test/linear_algebra/matrix_unittest.cpp
   source/linear_algebra/matrix.cpp
+  source/quaternions/quaternion.cpp
 )
 
 target_link_libraries(

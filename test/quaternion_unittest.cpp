@@ -22,6 +22,12 @@ TEST(QuaternionTest, InitTest) {
     EXPECT_EQ(quat.z, 4);
 }
 
+TEST(QuaternionTest, InitTestAngleVec) {
+    Quaternion quat(pi/2, {1, 0, 0});
+
+    EXPECT_EQ(quat, Quaternion(cos(pi/4), sin(pi/4), 0, 0));
+}
+
 TEST(QuaternionTest, ModTest) {
     Quaternion quat1(1, 1, 1, 1);
     EXPECT_NEAR(quat1.mod(), sqrt(4), 0.0001);
@@ -98,45 +104,63 @@ TEST(QuaternionTest, productTest) {
     EXPECT_EQ(quat5 * quat6, exp6);
 }
 
-TEST(QuaternionTest, VectorMultiplication) {
-    Quaternion quat1 = {1, 0, 0, 0};
-    Vector vec1 = {2, 3, 4};
+TEST(QuaternionTest, VectorMultiplication1) {
+    Quaternion quat = {1, 0, 0, 0};
+    Vector vec = {2, 3, 4};
+    Quaternion exp = {0, 2, 3, 4};
 
-    EXPECT_EQ(vec1, quat1.conj() * vec1 * quat1);
+    EXPECT_EQ(exp, quat.conj() * vec * quat);
+}
 
-    Quaternion quat2 = {cos(pi / 4), 0, 0, sin(pi / 4)};
-    Vector vec2 = {1, 0, 0};
-    Vector exp2 = {0, 1, 0};
+TEST(QuaternionTest, VectorMultiplication2) {
+    Quaternion quat = {cos(pi / 4), 0, 0, sin(pi / 4)};
+    Vector vec = {1, 0, 0};
+    Quaternion exp = {0, 0, -1, 0};
 
-    EXPECT_EQ(exp2, quat2.conj() * vec2 * quat2);
+    EXPECT_EQ(exp, quat.conj() * vec * quat);
+}
 
-    Quaternion quat3 = {cos(pi / 4), sin(pi / 4), 0, 0};
-    Vector vec3 = {0, 1, -3};
-    Vector exp3 = {0, 3, 1};
+TEST(QuaternionTest, VectorMultiplication3) {
+    Quaternion quat = {cos(pi / 4), sin(pi / 4), 0, 0};
+    Vector vec = {0, 1, -3};
+    Quaternion exp = {0, 0, -3, -1};
 
-    EXPECT_EQ(exp3, quat3.conj() * vec3 * quat3);
+    EXPECT_EQ(exp, quat.conj() * vec * quat);
+}
 
-    Quaternion quat4 = {cos(pi / 4), 0, sin(pi / 4), 0};
-    Vector vec4 = {1, 0, 2};
-    Vector exp4 = {2, 0, -1};
+TEST(QuaternionTest, VectorMultiplication4) {
+    Quaternion quat = {cos(pi / 4), 0, sin(pi / 4), 0};
+    Vector vec = {1, 0, 2};
+    Quaternion exp = {0, -2, 0, 1};
 
-    EXPECT_EQ(exp4, quat4.conj() * vec4 * quat4);
-
+    EXPECT_EQ(exp, quat.conj() * vec * quat);
 };
 
 
-TEST(QuaternionTest, VectorRotation) {
-    Vector vec1 = {1, 0, 0};
-    Quaternion quat1 = {cos(pi/4), 0, 0, sin(pi/4)};
-    Vector exp1 = {0, 1, 0};
+TEST(QuaternionTest, VectorRotation1) {
+    Vector vec = {1, 0, 0};
+    Quaternion quat = {cos(pi/4), 0, 0, sin(pi/4)};
+    Vector exp = {0, -1, 0};
 
-    EXPECT_EQ(exp1, rotate(vec1, quat1));
+    EXPECT_EQ(exp, rotate(vec, quat));
+}
 
-    Vector vec2 = {1, 0, 0};
-    Quaternion quat2 = {pi/2, {0, 0, 1}};
-    Vector exp2 = {0, 1, 0};
+TEST(QuaternionTest, VectorRotation2) {
+    Vector vec = {1, 0, 0};
+    Quaternion quat = {pi/2, {0, 0, 1}};
+    Vector exp = {0, -1, 0};
 
-    EXPECT_EQ(exp2, rotate(vec2, quat2));
+    EXPECT_EQ(exp, rotate(vec, quat));
+}
+
+TEST(QuaternionTest, VectorRotation3) {
+    Vector vec = {1, 0, 0};
+    Quaternion quat1 = {pi/2, {1, 0, 0}};
+    Quaternion quat2 = {pi/2.6, {1, 0, 0}};
+    Vector exp = {1, 0, 0};
+
+    EXPECT_EQ(exp, rotate(vec, quat1));
+    EXPECT_EQ(exp, rotate(vec, quat2));
 };
 
 }

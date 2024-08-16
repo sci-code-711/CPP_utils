@@ -27,16 +27,17 @@ class Quaternion {
         };
         inline Quaternion operator-() {return *this * -1;};
         Quaternion operator*(const Quaternion & that) const;
-        Vector operator*(const Vector & vec) const;
+        Quaternion operator*(const Vector & vec) const;
     private:
         double relPrecision = 0.0001;
 
 };
 
-Vector operator*(const Vector vec, const Quaternion quat);
+Quaternion operator*(const Vector vec, const Quaternion quat);
 
 inline Vector rotate(Vector vec, Quaternion quat) {
-    return quat.conj() * vec * quat / quat.mod();
+    Quaternion result = quat.conj() * vec * quat / quat.mod();
+    return {result.x, result.y, result.z};
 };
 
 inline std::ostream &operator<<(std::ostream &os, Quaternion const &quat) {

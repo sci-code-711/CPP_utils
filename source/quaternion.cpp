@@ -36,21 +36,19 @@ namespace cpp_utils {
 
     Quaternion Quaternion::operator*(const Quaternion &that) const {
         return Quaternion(
-            w * that.w - (x * that.x + y * that.y + z * that.z),
-            w * that.x + x * that.w + y * that.z - z * that.y,
-            w * that.y - x * that.z + y * that.w + z * that.x,
-            w * that.z + x * that.y - y * that.x + z * that.w
+            (w * that.w) - (x * that.x) - (y * that.y) - (z * that.z),
+            (w * that.x) + (x * that.w) + (y * that.z) - (z * that.y),
+            (w * that.y) - (x * that.z) + (y * that.w) + (z * that.x),
+            (w * that.z) + (x * that.y) - (y * that.x) + (z * that.w)
         );
     };
 
-    Vector Quaternion::operator*(const Vector & vec) const {
-        Quaternion result = Quaternion(0.0, vec.x, vec.y, vec.z) * *this;
-        return Vector(result.x, result.y, result.z);
+    Quaternion Quaternion::operator*(const Vector & vec) const {
+        return *this * Quaternion(0.0, vec.x, vec.y, vec.z);
     };
 
-    Vector operator*(const Vector vec, const Quaternion quat) {
-        Quaternion result = quat * Quaternion(0.0, vec.x, vec.y, vec.z);
-        return Vector(result.x, result.y, result.z);
+    Quaternion operator*(const Vector vec, const Quaternion quat) {
+        return Quaternion(0.0, vec.x, vec.y, vec.z) * quat;
     };
 
 }

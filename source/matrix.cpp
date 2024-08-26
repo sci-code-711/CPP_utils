@@ -10,7 +10,11 @@ namespace cpp_utils {
         double zx, double zy, double zz
     ): xx(xx), xy(xy), xz(xz), yx(yx), yy(yy), yz(yz), zx(zx), zy(zy), zz(zz) {};
 
-    double Matrix::det() const{
+    Matrix::Matrix(double xx, double yy, double zz): xx(xx), xy(0), xz(0), yx(0), yy(yy), yz(0), zx(0), zy(0), zz(zz) {
+        Matrix diagonalMatrix(xx, 0, 0, 0, yy, 0, 0, 0, zz);
+    };
+
+    double Matrix::det() const {
         return xx*(yy*zz-yz*zy)-xy*(yx*zz-yz*zx)+xz*(yx*zy-yy*zx);
     }
 

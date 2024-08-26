@@ -28,6 +28,19 @@ TEST(MatrixTest, InitTest) {
     EXPECT_EQ(Mat1.zz, 8);
 }
 
+TEST(MatrixTest, DiagonalInitTest) {
+    cpp_utils::Matrix Mat1(1, 2, 3);
+    EXPECT_EQ(Mat1.xx, 1);
+    EXPECT_EQ(Mat1.xy, 0);
+    EXPECT_EQ(Mat1.xz, 0);
+    EXPECT_EQ(Mat1.yx, 0);
+    EXPECT_EQ(Mat1.yy, 2);
+    EXPECT_EQ(Mat1.yz, 0);
+    EXPECT_EQ(Mat1.zx, 0);
+    EXPECT_EQ(Mat1.zy, 0);
+    EXPECT_EQ(Mat1.zz, 3);
+}
+
 TEST(MatrixTest, DetTest) {
     cpp_utils::Matrix iMat;
     cpp_utils::Matrix Mat1(2, 0, 0, 0, 2, 0, 0, 0, 2);

@@ -140,6 +140,15 @@ TEST(MatrixTest, VectorMultiplicationTest) {
     EXPECT_FALSE(Vec3 * Mat1 == Vec2);
 }
 
+TEST(MatrixTest, AttriCoordMultiplicationTest) {
+    cpp_utils::Matrix Mat1(1, 1, 0, 0, 1, 0, 0, 0, 0);
+    cpp_utils::AttriCoord Attri1(0, 1, 2, 3, 4);
+    cpp_utils::AttriCoord Attri2(1, 1, 0, 3, 4);
+
+    EXPECT_TRUE(Mat1 * Attri1 == Attri2);
+    EXPECT_FALSE(Mat1 * Attri2 == Attri1);
+}
+
 TEST(MatrixTest, InverseTest) {
     cpp_utils::Matrix Mat1(0, 1, 2, 3, 4, 5, 6, 7, 8);
     cpp_utils::Matrix Mat2(0, 0, 0, 0, 0, 0, 0, 0, 0);

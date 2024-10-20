@@ -25,6 +25,12 @@ bool AttriCoord::operator==(const AttriCoord & that) const {
     if ((z < (that.z - test_precision)) || (z > (that.z + test_precision))) {
         return false;
     }
+    if ((a < (that.a - test_precision)) || (a > (that.a + test_precision))) {
+        return false;
+    }
+    if ((b < (that.b - test_precision)) || (b > (that.b + test_precision))) {
+        return false;
+    }
     return true;
 }
 

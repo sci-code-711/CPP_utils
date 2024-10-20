@@ -27,6 +27,9 @@ add_executable(
   test/quaternion_unittest.cpp
   source/quaternion.hpp
   source/quaternion.cpp
+  test/attriCoord_unittest.cpp
+  source/attriCoord.hpp
+  source/attriCoord.cpp
 )
 
 target_link_libraries(

@@ -3,6 +3,7 @@
 
 #include <stdexcept>
 #include "vector.hpp"
+#include "attriCoord.hpp"
 
 namespace cpp_utils {
 
@@ -25,6 +26,7 @@ class Matrix{
         inline Matrix operator-() {return *this * -1;};
         Matrix operator*(const Matrix & that) const;
         Vector operator*(const Vector & that) const;
+        AttriCoord operator*(const AttriCoord & that) const;
         Matrix inverse() const;
     private:
         double precision = 0.0001;

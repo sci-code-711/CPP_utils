@@ -76,6 +76,10 @@ namespace cpp_utils {
         return Vector((xx * that.x) + (xy * that.y) + (xz * that.z), (yx * that.x) + (yy * that.y) + (yz * that.z), (zx * that.x) + (zy * that.y) + (zz * that.z));
     }
 
+    AttriCoord Matrix::operator*(const AttriCoord & that) const {
+        return AttriCoord((xx * that.x) + (xy * that.y) + (xz * that.z), (yx * that.x) + (yy * that.y) + (yz * that.z), (zx * that.x) + (zy * that.y) + (zz * that.z), that.a, that.b);
+    }
+
     Vector operator*(Vector that, const Matrix & those) {
         return Vector((that.x * those.xx) + (that.y * those.yx) + (that.z * those.zx), (that.x * those.xy) + (that.y * those.yy) + (that.z * those.zy), (that.x * those.xz) + (that.y * those.yz) + (that.z * those.zz));
     }

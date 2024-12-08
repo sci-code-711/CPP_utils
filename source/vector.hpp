@@ -23,7 +23,7 @@ class Vector{
         inline Vector operator-() {return *this * -1;};
         double operator*(const Vector & that) const;
         Vector operator^(const Vector & that) const;
-    private:
+    protected:
         double precision = 0.0001;
 };
 

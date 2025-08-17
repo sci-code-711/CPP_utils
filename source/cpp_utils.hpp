@@ -1,3 +1,5 @@
 #include "vector.hpp"
 #include "quaternion.hpp"
 #include "matrix.hpp"
+#include "line.hpp"
+#include "plane.hpp"

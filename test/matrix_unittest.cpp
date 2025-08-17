@@ -1,5 +1,4 @@
 #include "gtest/gtest.h"
-#include <math.h>
 #include "../source/matrix.hpp"
 
 TEST(MatrixTest, DefaultInitTest) {

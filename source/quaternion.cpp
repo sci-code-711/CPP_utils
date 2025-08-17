@@ -1,6 +1,4 @@
 #include "quaternion.hpp"
-#include <math.h>
-#include <cmath>
 
 namespace cpp_utils {
 
@@ -9,7 +7,7 @@ namespace cpp_utils {
         x(axis.x / axis.mod() * sin(angle / 2)),
         y(axis.y / axis.mod() * sin(angle / 2)),
         z(axis.z / axis.mod() * sin(angle / 2))
-        {};
+    {};
 
     double Quaternion::mod() const {
         return sqrt((w * w) + (x * x) + (y * y) + (z * z));
@@ -17,9 +15,9 @@ namespace cpp_utils {
 
     Quaternion Quaternion::conj() const {
         return {w, -x, -y, -z};
-    }
+    };
 
-    Quaternion Quaternion::operator*(const double & that) const {
+    Quaternion Quaternion::operator*(const double &that) const {
         return Quaternion(w * that, x * that, y * that, z * that);
     };
 
@@ -43,7 +41,7 @@ namespace cpp_utils {
         );
     };
 
-    Quaternion Quaternion::operator*(const Vector & vec) const {
+    Quaternion Quaternion::operator*(const Vector &vec) const {
         return *this * Quaternion(0.0, vec.x, vec.y, vec.z);
     };
 

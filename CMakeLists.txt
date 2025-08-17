@@ -27,6 +27,12 @@ add_executable(
   test/quaternion_unittest.cpp
   source/quaternion.hpp
   source/quaternion.cpp
+  test/line_unittest.cpp
+  source/line.hpp
+  source/line.cpp
+  test/plane_unittest.cpp
+  source/plane.hpp
+  source/plane.cpp
 )
 
 target_link_libraries(

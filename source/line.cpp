@@ -11,7 +11,7 @@ namespace cpp_utils {
         }
     };
 
-    bool Line::operator==(const Line &that) {
+    bool Line::operator==(const Line &that) const {
         bool on = this->isOnLine(that.point);
         if (direction == that.direction && on) {
             return true;
@@ -20,39 +20,34 @@ namespace cpp_utils {
         }
     };
 
-    bool Line::isOnLine(const Vector &that) {
-        Vector vecDiff = that - point;
-        double scalarX, scalarY, scalarZ;
-        if ((direction.x == 0 && vecDiff.x != 0) || 
-            (direction.y == 0 && vecDiff.y != 0) || 
-            (direction.z == 0 && vecDiff.z != 0)) {
-            return false;
-        } else {
-            if (direction.x == 0) {scalarX = vecDiff.x;} else {scalarX = vecDiff.x / direction.x;}
-            if (direction.y == 0) {scalarY = vecDiff.z;} else {scalarY = vecDiff.y / direction.y;}
-            if (direction.z == 0) {scalarZ = vecDiff.z;} else {scalarZ = vecDiff.z / direction.z;}
-            if ((scalarX == scalarY && scalarX == scalarZ) ||
-                (scalarY == 0 && scalarX == scalarZ && direction.y == 0) ||
-                (scalarZ == 0 && scalarX == scalarY && direction.z == 0) ||
-                (scalarY == 0 && scalarZ == 0 && direction.y == 0 && direction.z == 0)) {
-                scalar = scalarX;
-                return true;
-            } else if ((scalarX == 0 && scalarY == scalarZ && direction.x == 0) ||
-                       (scalarX == 0 && scalarZ == 0 && direction.x == 0 && direction.z == 0)) {
-                scalar = scalarY;
-                return true;
-            } else if ((scalarX == 0 && scalarY == 0 && direction.x == 0 && direction.y == 0)) {
-                scalar = scalarZ;
-                return true;
-            } else {
-                return false;
-            }
-        };
+    bool Line::isOnLine(const Vector &that) const {
+        bool isOn = true;
+        try {
+            this->whereOnLine(that);
+        } catch (std::overflow_error) {
+            isOn = false;
+        }
+        return isOn;
     }
 
-    double Line::whereOnLine(const Vector &that) {
-        if (this->isOnLine(that)) {
-            return scalar;
+    double Line::whereOnLine(const Vector &that) const {
+        Vector vecDiff = that - point;
+        double scalarX, scalarY, scalarZ;
+
+        if (direction.x == 0) {scalarX = vecDiff.x;} else {scalarX = vecDiff.x / direction.x;}
+        if (direction.y == 0) {scalarY = vecDiff.z;} else {scalarY = vecDiff.y / direction.y;}
+        if (direction.z == 0) {scalarZ = vecDiff.z;} else {scalarZ = vecDiff.z / direction.z;}
+
+        if ((scalarX == scalarY && scalarX == scalarZ) ||
+            (scalarY == 0 && scalarX == scalarZ && direction.y == 0) ||
+            (scalarZ == 0 && scalarX == scalarY && direction.z == 0) ||
+            (scalarY == 0 && scalarZ == 0 && direction.y == 0 && direction.z == 0)) {
+            return scalarX;
+        } else if ((scalarX == 0 && scalarY == scalarZ && direction.x == 0) ||
+                    (scalarX == 0 && scalarZ == 0 && direction.x == 0 && direction.z == 0)) {
+            return scalarY;
+        } else if ((scalarX == 0 && scalarY == 0 && direction.x == 0 && direction.y == 0)) {
+            return scalarZ;
         } else {
             throw std::overflow_error("Point not on line.");
         }

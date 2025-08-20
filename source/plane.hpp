@@ -9,7 +9,7 @@ namespace cpp_utils {
         public:
             Vector point, normal;
             inline Plane() : point(0, 0, 0), normal(norm, norm, norm) {};
-            Plane(Vector pnt, Vector nor);
+            Plane(Vector _point, Vector _normal);
 
             bool operator==(const Plane &that) const;
             inline bool operator!=(const Plane &that) const {

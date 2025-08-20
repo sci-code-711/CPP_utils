@@ -2,8 +2,8 @@
 
 namespace cpp_utils {
 
-    Plane::Plane(Vector pnt, Vector nor) : point(pnt) {
-        Vector normNor = nor.normalise();
+    Plane::Plane(Vector _point, Vector _normal) : point(_point) {
+        Vector normNor = _normal.normalise();
         if ((normNor.x < 0) || (normNor.x == 0 && normNor.y < 0) || (normNor.x == 0 && normNor.y == 0 && normNor.z < 0)) {
             normal = -normNor;
         } else {

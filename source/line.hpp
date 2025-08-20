@@ -11,7 +11,7 @@ namespace cpp_utils {
         public:
             Vector point, direction;
             inline Line() : point(0, 0, 0), direction(norm, norm, norm) {};
-            Line(Vector pnt, Vector dir);
+            Line(Vector _point, Vector _direction);
 
             bool operator==(const Line &that) const;
             inline bool operator!=(const Line &that) const {

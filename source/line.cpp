@@ -2,8 +2,8 @@
 
 namespace cpp_utils {
 
-    Line::Line(Vector pnt, Vector dir) : point(pnt) {
-        Vector normDir = dir.normalise();
+    Line::Line(Vector _point, Vector _direction) : point(_point) {
+        Vector normDir = _direction.normalise();
         if ((normDir.x < 0) || (normDir.x == 0 && normDir.y < 0) || (normDir.x == 0 && normDir.y == 0 && normDir.z < 0)) {
             direction = -normDir;
         } else {

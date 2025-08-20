@@ -2,7 +2,7 @@
 #define VECTOR_HPP
 
 #include <iostream>
-#include "..\exception\value.hpp"
+#include "..\exception\exception.hpp"
 
 namespace cpp_utils {
 

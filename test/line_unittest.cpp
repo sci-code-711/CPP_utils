@@ -144,7 +144,7 @@ TEST(LineTest, IsOnTest) {
     EXPECT_TRUE(line2.isOnLine(point8));
 }
 
-TEST(LineTest, whereOnTest) {
+TEST(LineTest, WhereOnTest) {
     cpp_utils::Vector point0(0, 1, 1);
     cpp_utils::Vector point1(-1, 1, -1);
     cpp_utils::Vector point2(-1, 2, 0);

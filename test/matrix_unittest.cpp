@@ -146,8 +146,8 @@ TEST(MatrixTest, InverseTest) {
     cpp_utils::Matrix Mat4(0, 0, 1, 0, 1, 0, -1, 0, 0);
     cpp_utils::Matrix Mat5(0, 0, 1, 0, 1, 0, 1, 0, 0);
 
-    EXPECT_THROW(Mat1.inverse(), std::exception);
-    EXPECT_THROW(Mat2.inverse(), std::exception);
+    EXPECT_THROW(Mat1.inverse(), value_error);
+    EXPECT_THROW(Mat2.inverse(), value_error);
     EXPECT_TRUE(Mat3.inverse() == Mat4);
     EXPECT_TRUE(Mat4.inverse() == Mat3);
     EXPECT_TRUE(Mat5.inverse() == Mat5);

@@ -138,8 +138,8 @@ TEST(PlaneTest, IntersectionTest) {
 
     EXPECT_EQ(plane.intersection(line1), point0);
     EXPECT_EQ(plane.intersection(line2), point0);
-    EXPECT_THROW(plane.intersection(line3), std::exception);
-    EXPECT_THROW(plane.intersection(line4), std::exception);
+    EXPECT_THROW(plane.intersection(line3), value_error);
+    EXPECT_THROW(plane.intersection(line4), value_error);
 }
 
 TEST(PlaneTest, BetweenTest) {

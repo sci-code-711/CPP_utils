@@ -24,7 +24,7 @@ namespace cpp_utils {
         bool isOn = true;
         try {
             this->whereOnLine(that);
-        } catch (std::logic_error) {
+        } catch (value_error) {
             isOn = false;
         }
         return isOn;
@@ -49,7 +49,7 @@ namespace cpp_utils {
         } else if ((scalarX == 0 && scalarY == 0 && direction.x == 0 && direction.y == 0)) {
             return scalarZ;
         } else {
-            throw std::logic_error("Point not on line.");
+            throw value_error("Point not on line.");
         }
     };
 

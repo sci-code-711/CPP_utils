@@ -161,14 +161,14 @@ TEST(LineTest, WhereOnTest) {
     cpp_utils::Line line2(point6, point7);
 
     EXPECT_EQ(line0.whereOnLine(point0), 0);
-    EXPECT_THROW(line0.whereOnLine(point1), std::exception);
+    EXPECT_THROW(line0.whereOnLine(point1), value_error);
     EXPECT_EQ(line0.whereOnLine(point2), - 1 / norm);
 
     EXPECT_EQ(line1.whereOnLine(point3), 0);
-    EXPECT_THROW(line1.whereOnLine(point4), std::exception);
+    EXPECT_THROW(line1.whereOnLine(point4), value_error);
     EXPECT_EQ(line1.whereOnLine(point5), 1 / norm);
 
     EXPECT_EQ(line2.whereOnLine(point6), 0);
-    EXPECT_THROW(line2.whereOnLine(point7), std::exception);
+    EXPECT_THROW(line2.whereOnLine(point7), value_error);
     EXPECT_EQ(line2.whereOnLine(point8), - 1 / norm);
 }

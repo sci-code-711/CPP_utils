@@ -29,7 +29,7 @@ namespace cpp_utils {
         Vector vecDiff = that.point - point;
         double dotProd = vecDiff * normal;
         if (cosAngle == 0) {
-            throw std::logic_error("Line lies in plane or is parallel to plane.");
+            throw value_error("Line lies in plane or is parallel to plane.");
         } else if (dotProd == 0) {
             return that.point;
         } else {

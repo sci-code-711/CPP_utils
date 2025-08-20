@@ -11,6 +11,7 @@ namespace cpp_utils {
             inline Vector() : x(0), y(0), z(0) {};
             Vector(double x, double y, double z);
             double mod() const;
+            Vector normalise() const;
 
             bool operator==(const Vector &that) const;
             inline bool operator!=(const Vector &that) const {

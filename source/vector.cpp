@@ -8,6 +8,10 @@ namespace cpp_utils {
         return sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
     };
 
+    Vector Vector::normalise() const {
+        return (1 / this->mod()) * *this;
+    };
+
     bool Vector::operator==(const Vector &that) const {
         double test_precision = std::fmax(precision, that.precision);
         if ((x < (that.x - test_precision)) || (x > (that.x + test_precision))) {

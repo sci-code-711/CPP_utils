@@ -9,16 +9,19 @@ namespace cpp_utils {
 
     class Line {
         public:
+            double scalar;
             Vector point, direction;
             inline Line() : point(0, 0, 0), direction(norm, norm, norm) {};
-            Line(Vector setPoint, Vector setDirection);
+            Line(Vector pnt, Vector dir);
 
-            bool operator==(const Line &that) const;
-            inline bool operator!=(const Line &that) const {
+            bool operator==(const Line &that);
+            inline bool operator!=(const Line &that) {
                 return true != (*this == that);
             };
 
-            std::pair<bool,double> isOnLine(const Vector &that) const;
+            bool isOnLine(const Vector &that);
+
+            double whereOnLine(const Vector &that);
     };
 
 }

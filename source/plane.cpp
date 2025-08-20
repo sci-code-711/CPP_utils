@@ -21,11 +21,7 @@ namespace cpp_utils {
 
     bool Plane::isOnPlane(const Vector &that) const {
         Vector vecDiff = that - point;
-        if (vecDiff * normal == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return vecDiff * normal == 0;
     };
 
     Vector Plane::intersection(const Line &that) const {
@@ -33,7 +29,7 @@ namespace cpp_utils {
         Vector vecDiff = that.point - point;
         double dotProd = vecDiff * normal;
         if (cosAngle == 0) {
-            throw std::overflow_error("Line lies in plane or is parallel to plane.");
+            throw std::logic_error("Line lies in plane or is parallel to plane.");
         } else if (dotProd == 0) {
             return that.point;
         } else {

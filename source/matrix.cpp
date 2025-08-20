@@ -80,7 +80,7 @@ namespace cpp_utils {
 
     Matrix Matrix::inverse() const {
         if (this->det() == 0) {
-            throw std::overflow_error("No inverse due to zero value of determinant.");
+            throw std::logic_error("No inverse due to zero value of determinant.");
         } else {
             return (1/det()) * Matrix( ((yy * zz) - (zy * yz)), -((xy * zz) - (zy * xz)),  ((xy * yz) - (yy * xz)),
                                       -((yx * zz) - (zx * yz)),  ((xx * zz) - (zx * xz)), -((xx * yz) - (yx * xz)),

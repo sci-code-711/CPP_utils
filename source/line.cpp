@@ -12,12 +12,7 @@ namespace cpp_utils {
     };
 
     bool Line::operator==(const Line &that) const {
-        bool on = this->isOnLine(that.point);
-        if (direction == that.direction && on) {
-            return true;
-        } else {
-            return false;
-        }
+        return direction == that.direction && this->isOnLine(that.point);
     };
 
     bool Line::isOnLine(const Vector &that) const {
@@ -28,7 +23,7 @@ namespace cpp_utils {
             isOn = false;
         }
         return isOn;
-    }
+    };
 
     double Line::whereOnLine(const Vector &that) const {
         Vector vecDiff = that - point;
@@ -52,5 +47,5 @@ namespace cpp_utils {
             throw value_error("Point not on line.");
         }
     };
-
+    
 }

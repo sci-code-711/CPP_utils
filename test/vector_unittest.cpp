@@ -1,107 +1,112 @@
 #include "gtest/gtest.h"
 #include "../source/vector.hpp"
 
-TEST(VectorTest, DefaultInitTest) {
-    cpp_utils::Vector NullVec;
-    EXPECT_EQ(NullVec.x, 0);
-    EXPECT_EQ(NullVec.y, 0);
-    EXPECT_EQ(NullVec.z, 0);
-}
+namespace cpp_utils {
 
-TEST(VectorTest, InitTest) {
-    cpp_utils::Vector Vec1(1, 2, 3);
-    EXPECT_EQ(Vec1.x, 1);
-    EXPECT_EQ(Vec1.y, 2);
-    EXPECT_EQ(Vec1.z, 3);
-}
+    TEST(VectorTest, DefaultInitTest) {
+        Vector NullVec;
+        EXPECT_EQ(NullVec.x, 0);
+        EXPECT_EQ(NullVec.y, 0);
+        EXPECT_EQ(NullVec.z, 0);
+    }
 
-TEST(VectorTest, ModTest) {
-    cpp_utils::Vector Vec1(1, 1, 1);
-    EXPECT_NEAR(Vec1.mod(), sqrt(3), 0.0001);
-}
+    TEST(VectorTest, InitTest) {
+        Vector Vec1(1, 2, 3);
+        EXPECT_EQ(Vec1.x, 1);
+        EXPECT_EQ(Vec1.y, 2);
+        EXPECT_EQ(Vec1.z, 3);
+    }
 
-TEST(VectorTest, EqualityTest) {
-    cpp_utils::Vector Vec1(1, 0, 1);
-    cpp_utils::Vector Vec2(0, 1, 0);
+    TEST(VectorTest, ModTest) {
+        Vector Vec1(1, 1, 1);
+        EXPECT_NEAR(Vec1.mod(), sqrt(3), 0.0001);
+    }
 
-    EXPECT_TRUE(Vec1 == Vec1);
-    EXPECT_FALSE(Vec1 == Vec2);
-}
+    TEST(VectorTest, EqualityTest) {
+        Vector Vec1(1, 0, 1);
+        Vector Vec2(0, 1, 0);
 
-TEST(VectorTest, NotEqualityTest) {
-    cpp_utils::Vector Vec1(1, 0, 1);
-    cpp_utils::Vector Vec2(0, 1, 0);
+        EXPECT_TRUE(Vec1 == Vec1);
+        EXPECT_FALSE(Vec1 == Vec2);
+    }
 
-    EXPECT_FALSE(Vec1 != Vec1);
-    EXPECT_TRUE(Vec1 != Vec2);
-}
+    TEST(VectorTest, NotEqualityTest) {
+        Vector Vec1(1, 0, 1);
+        Vector Vec2(0, 1, 0);
 
-TEST(VectorTest, AdditionTest) {
-    cpp_utils::Vector Vec1(1, 0, 1);
-    cpp_utils::Vector Vec2(0, 1, 0);
+        EXPECT_FALSE(Vec1 != Vec1);
+        EXPECT_TRUE(Vec1 != Vec2);
+    }
 
-    cpp_utils::Vector ExpVec(1, 1, 1);
+    TEST(VectorTest, AdditionTest) {
+        Vector Vec1(1, 0, 1);
+        Vector Vec2(0, 1, 0);
 
-    EXPECT_EQ(Vec1 + Vec2, ExpVec);
-}
+        Vector ExpVec(1, 1, 1);
+        EXPECT_EQ(Vec1 + Vec2, ExpVec);
+    }
 
-TEST(VectorTest, SubtractionTest) {
-    cpp_utils::Vector Vec1(1, 0, 1);
-    cpp_utils::Vector Vec2(0, 1, 1);
+    TEST(VectorTest, SubtractionTest) {
+        Vector Vec1(1, 0, 1);
+        Vector Vec2(0, 1, 1);
 
-    cpp_utils::Vector ExpVec(1, -1, 0);
-    EXPECT_EQ(Vec1 - Vec2, ExpVec);
-    EXPECT_EQ(Vec2 - Vec1, -ExpVec);
-}
+        Vector ExpVec(1, -1, 0);
+        EXPECT_EQ(Vec1 - Vec2, ExpVec);
+        EXPECT_EQ(Vec2 - Vec1, -ExpVec);
+    }
 
-TEST(VectorTest, NegativeTest) {
-    cpp_utils::Vector Vec1(1, -2, 3);
-    cpp_utils::Vector Vec2(-1, 2, -3);
+    TEST(VectorTest, NegativeTest) {
+        Vector Vec1(1, -2, 3);
+        Vector Vec2(-1, 2, -3);
 
-    EXPECT_EQ(-Vec1, Vec2);
-}
+        EXPECT_EQ(-Vec1, Vec2);
+    }
 
-TEST(VectorTest, MultiplicationTest) {
-    cpp_utils::Vector Vec1(1, 2, -1);
+    TEST(VectorTest, MultiplicationTest) {
+        Vector Vec1(1, 2, -1);
 
-    cpp_utils::Vector Exp1(-2, -4, 2);
-    EXPECT_EQ(Vec1 * int(-2), Exp1) << "Failed to multiply by negative int";
-    EXPECT_EQ(Vec1 * float(-2), Exp1) << "Failed to multiply by negative float";
+        Vector Exp1(-2, -4, 2);
+        EXPECT_EQ(Vec1 * int(-2), Exp1) << "Failed to multiply by negative int";
+        EXPECT_EQ(int(-2) * Vec1, Exp1) << "Failed to multiply by negative int";
+        EXPECT_EQ(Vec1 * float(-2), Exp1) << "Failed to multiply by negative float";
+        EXPECT_EQ(float(-2) * Vec1, Exp1) << "Failed to multiply by negative float";
 
-    cpp_utils::Vector Exp2(0.5, 1.0, -0.5);
-    cpp_utils::Vector res = Vec1 * float(0.5);
-    EXPECT_EQ( Vec1 * float(0.5), Exp2) << "Failed to multiply by decimal value";
-}
+        Vector Exp2(0.5, 1.0, -0.5);
+        EXPECT_EQ(Vec1 * float(0.5), Exp2) << "Failed to multiply by decimal value";
+        EXPECT_EQ(float(0.5) * Vec1, Exp2) << "Failed to multiply by decimal value";
+    }
 
-TEST(VectorTest, DivisionTest) {
-    cpp_utils::Vector Vec1(2, 4, -2);
+    TEST(VectorTest, DivisionTest) {
+        Vector Vec1(2, 4, -2);
 
-    cpp_utils::Vector Exp1(1, 2, -1);
-    EXPECT_EQ(Vec1 / float(2), Exp1);
-    EXPECT_EQ(Vec1 / int(2), Exp1);
-}
+        Vector Exp1(1, 2, -1);
+        EXPECT_EQ(Vec1 / float(2), Exp1);
+        EXPECT_EQ(Vec1 / int(2), Exp1);
+    }
 
-TEST(VectorTest, ZeroDivisionTest) {
-    cpp_utils::Vector Vec1;
-    std::invalid_argument Excep("Division by zero is not possible");
+    TEST(VectorTest, ZeroDivisionTest) {
+        Vector Vec1;
+        std::invalid_argument Excep("Division by zero is not possible");
 
-}
+    }
 
-TEST(VectorTest, DotProductTest) {
-    cpp_utils::Vector Vec1(1, 0, 0);
-    cpp_utils::Vector Vec2(0, 1, 2);
-    cpp_utils::Vector Vec3(2, 0, 3);
+    TEST(VectorTest, DotProductTest) {
+        Vector Vec1(1, 0, 0);
+        Vector Vec2(0, 1, 2);
+        Vector Vec3(2, 0, 3);
 
-    EXPECT_NEAR(Vec1 * Vec2, 0, 0.0001);
-    EXPECT_NEAR(Vec1 * Vec3, 2, 0.0001);
-    EXPECT_NEAR(Vec2 * Vec3, 6, 0.0001);
-}
+        EXPECT_NEAR(Vec1 * Vec2, 0, 0.0001);
+        EXPECT_NEAR(Vec1 * Vec3, 2, 0.0001);
+        EXPECT_NEAR(Vec2 * Vec3, 6, 0.0001);
+    }
 
-TEST(VectorTest, CrossProductTest) {
-    cpp_utils::Vector Vecx(1, 0, 0);
-    cpp_utils::Vector Vecy(0, 1, 0);
-    cpp_utils::Vector Vecz(0, 0, 1);
+    TEST(VectorTest, CrossProductTest) {
+        Vector Vecx(1, 0, 0);
+        Vector Vecy(0, 1, 0);
+        Vector Vecz(0, 0, 1);
 
-    EXPECT_EQ(Vecx ^ Vecy, Vecz);
-    EXPECT_EQ(Vecy ^ Vecx, -Vecz);
+        EXPECT_EQ(Vecx ^ Vecy, Vecz);
+        EXPECT_EQ(Vecy ^ Vecx, -Vecz);
+    }
+
 }

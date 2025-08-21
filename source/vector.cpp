@@ -13,17 +13,10 @@ namespace cpp_utils {
     };
 
     bool Vector::operator==(const Vector &that) const {
-        double test_precision = std::fmax(precision, that.precision);
-        if ((x < (that.x - test_precision)) || (x > (that.x + test_precision))) {
-            return false;
-        }
-        if ((y < (that.y - test_precision)) || (y > (that.y + test_precision))) {
-            return false;
-        }
-        if ((z < (that.z - test_precision)) || (z > (that.z + test_precision))) {
-            return false;
-        }
-        return true;
+        double testPrecision = std::fmax(precision, that.precision);
+        return !(std::abs(x - that.x) > testPrecision ||
+                 std::abs(y - that.y) > testPrecision ||
+                 std::abs(z - that.z) > testPrecision);
     };
 
     Vector Vector::operator+(const Vector &that) const {

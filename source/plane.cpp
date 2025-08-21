@@ -12,11 +12,7 @@ namespace cpp_utils {
     };
 
     bool Plane::operator==(const Plane &that) const {
-        if (normal == that.normal && this->isOnPlane(that.point)) {
-            return true;
-        } else {
-            return false;
-        }
+        return normal == that.normal && this->isOnPlane(that.point);
     };
 
     bool Plane::isOnPlane(const Vector &that) const {
@@ -44,11 +40,7 @@ namespace cpp_utils {
         } else {
             double abovePlane1 = (line.point - plane1.point) * plane1.normal;
             double abovePlane2 = (line.point - plane2.point) * plane2.normal;
-            if (abovePlane1 * abovePlane2 < 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return abovePlane1 * abovePlane2 < 0;
         }
     };
 

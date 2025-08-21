@@ -17,43 +17,28 @@ namespace cpp_utils {
     };
 
     bool Matrix::operator==(const Matrix &that) const {
-        double test_precision = std::fmax(precision, that.precision);
-        if ((xx < (that.xx - test_precision)) || (xx > (that.xx + test_precision))) {
-        return false;
-        }
-        if ((xy < (that.xy - test_precision)) || (xy > (that.xy + test_precision))) {
-            return false;
-        }
-        if ((xz < (that.xz - test_precision)) || (xz > (that.xz + test_precision))) {
-            return false;
-        }
-        if ((yx < (that.yx - test_precision)) || (yx > (that.yx + test_precision))) {
-            return false;
-        }
-        if ((yy < (that.yy - test_precision)) || (yy > (that.yy + test_precision))) {
-            return false;
-        }
-        if ((yz < (that.yz - test_precision)) || (yz > (that.yz + test_precision))) {
-            return false;
-        }
-        if ((zx < (that.zx - test_precision)) || (zx > (that.zx + test_precision))) {
-            return false;
-        }
-        if ((zy < (that.zy - test_precision)) || (zy > (that.zy + test_precision))) {
-            return false;
-        }
-        if ((zz < (that.zz - test_precision)) || (zz > (that.zz + test_precision))) {
-            return false;
-        }
-        return true;
+        double testPrecision = std::fmax(precision, that.precision);
+        return !(std::abs(xx - that.xx) > testPrecision ||
+                 std::abs(xy - that.xy) > testPrecision ||
+                 std::abs(xz - that.xz) > testPrecision ||
+                 std::abs(yx - that.yx) > testPrecision ||
+                 std::abs(yy - that.yy) > testPrecision ||
+                 std::abs(yz - that.yz) > testPrecision ||
+                 std::abs(zx - that.zx) > testPrecision ||
+                 std::abs(zy - that.zy) > testPrecision ||
+                 std::abs(zz - that.zz) > testPrecision);
     };
 
     Matrix Matrix::operator+(const Matrix &that) const {
-        return Matrix(this->xx + that.xx, this->xy + that.xy, this->xz + that.xz, this->yx + that.yx, this->yy + that.yy, this->yz + that.yz, this->zx + that.zx, this->zy + that.zy, this->zz + that.zz);
+        return Matrix(this->xx + that.xx, this->xy + that.xy, this->xz + that.xz,
+                      this->yx + that.yx, this->yy + that.yy, this->yz + that.yz,
+                      this->zx + that.zx, this->zy + that.zy, this->zz + that.zz);
     };
 
     Matrix Matrix::operator-(const Matrix &that) const {
-        return Matrix(this->xx - that.xx, this->xy - that.xy, this->xz - that.xz, this->yx - that.yx, this->yy - that.yy, this->yz - that.yz, this->zx - that.zx, this->zy - that.zy, this->zz - that.zz);
+        return Matrix(this->xx - that.xx, this->xy - that.xy, this->xz - that.xz,
+                      this->yx - that.yx, this->yy - that.yy, this->yz - that.yz,
+                      this->zx - that.zx, this->zy - that.zy, this->zz - that.zz);
     };
 
     Matrix Matrix::operator*(const double &that) const {
@@ -65,17 +50,27 @@ namespace cpp_utils {
     };
 
     Matrix Matrix::operator*(const Matrix &that) const {
-        return Matrix((xx * that.xx) + (xy * that.yx) + (xz * that.zx), (xx * that.xy) + (xy * that.yy) + (xz * that.zy), (xx * that.xz) + (xy * that.yz) + (xz * that.zz),
-                      (yx * that.xx) + (yy * that.yx) + (yz * that.zx), (yx * that.xy) + (yy * that.yy) + (yz * that.zy), (yx * that.xz) + (yy * that.yz) + (yz * that.zz),
-                      (zx * that.xx) + (zy * that.yx) + (zz * that.zx), (zx * that.xy) + (zy * that.yy) + (zz * that.zy), (zx * that.xz) + (zy * that.yz) + (zz * that.zz));
+        return Matrix((xx * that.xx) + (xy * that.yx) + (xz * that.zx),
+                      (xx * that.xy) + (xy * that.yy) + (xz * that.zy),
+                      (xx * that.xz) + (xy * that.yz) + (xz * that.zz),
+                      (yx * that.xx) + (yy * that.yx) + (yz * that.zx),
+                      (yx * that.xy) + (yy * that.yy) + (yz * that.zy),
+                      (yx * that.xz) + (yy * that.yz) + (yz * that.zz),
+                      (zx * that.xx) + (zy * that.yx) + (zz * that.zx),
+                      (zx * that.xy) + (zy * that.yy) + (zz * that.zy),
+                      (zx * that.xz) + (zy * that.yz) + (zz * that.zz));
     };
 
     Vector Matrix::operator*(const Vector &that) const {
-        return Vector((xx * that.x) + (xy * that.y) + (xz * that.z), (yx * that.x) + (yy * that.y) + (yz * that.z), (zx * that.x) + (zy * that.y) + (zz * that.z));
+        return Vector((xx * that.x) + (xy * that.y) + (xz * that.z),
+                      (yx * that.x) + (yy * that.y) + (yz * that.z),
+                      (zx * that.x) + (zy * that.y) + (zz * that.z));
     };
 
     Vector operator*(const Vector that, const Matrix &those) {
-        return Vector((that.x * those.xx) + (that.y * those.yx) + (that.z * those.zx), (that.x * those.xy) + (that.y * those.yy) + (that.z * those.zy), (that.x * those.xz) + (that.y * those.yz) + (that.z * those.zz));
+        return Vector((that.x * those.xx) + (that.y * those.yx) + (that.z * those.zx),
+                      (that.x * those.xy) + (that.y * those.yy) + (that.z * those.zy),
+                      (that.x * those.xz) + (that.y * those.yz) + (that.z * those.zz));
     };
 
     Matrix Matrix::inverse() const {
@@ -86,6 +81,6 @@ namespace cpp_utils {
                                       -((yx * zz) - (zx * yz)),  ((xx * zz) - (zx * xz)), -((xx * yz) - (yx * xz)),
                                        ((yx * zy) - (zx * yy)), -((xx * zy) - (zx * xy)),  ((xx * yy) - (yx * xy)));
         };
-    }
+    };
     
 }

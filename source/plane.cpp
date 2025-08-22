@@ -34,7 +34,7 @@ namespace cpp_utils {
         }
     };
 
-    bool between(const Line line, const Plane &plane1, const Plane &plane2) {
+    bool isBetween(const Line line, const Plane &plane1, const Plane &plane2) {
         if (plane1.normal != plane2.normal || line.direction * plane1.normal != 0) {
             return false;
         } else {

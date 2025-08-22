@@ -15,11 +15,17 @@ namespace cpp_utils {
         return normal == that.normal && this->isOnPlane(that.point);
     };
 
+    /**
+     * Determines whether a point lines on a plane.
+     */
     bool Plane::isOnPlane(const Vector &that) const {
         Vector vecDiff = that - point;
         return vecDiff * normal == 0;
     };
 
+    /**
+     * Finds the point of intersection for a given line with the plane.
+     */
     Vector Plane::intersection(const Line &that) const {
         double cosAngle = that.direction * normal;
         Vector vecDiff = that.point - point;
@@ -33,7 +39,10 @@ namespace cpp_utils {
             return that.point + (scalar * that.direction);
         }
     };
-
+    
+    /**
+     * Determines whether a line lies stricly between twos planes.
+     */
     bool isBetween(const Line line, const Plane &plane1, const Plane &plane2) {
         if (plane1.normal != plane2.normal || line.direction * plane1.normal != 0) {
             return false;

@@ -15,6 +15,9 @@ namespace cpp_utils {
         return direction == that.direction && this->isOnLine(that.point);
     };
 
+    /**
+     * Determines whether a point lies on the line.
+     */
     bool Line::isOnLine(const Vector &that) const {
         bool isOn = true;
         try {
@@ -25,6 +28,9 @@ namespace cpp_utils {
         return isOn;
     };
 
+    /**
+     * Determines where on the line a point lies.
+     */
     double Line::whereOnLine(const Vector &that) const {
         Vector vecDiff = that - point;
         double scalarX, scalarY, scalarZ;

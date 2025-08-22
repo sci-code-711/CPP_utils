@@ -21,7 +21,7 @@ namespace cpp_utils {
             Vector intersection(const Line &that) const;
     };
 
-    bool between(const Line line, const Plane &plane1, const Plane &plane2);
+    bool isBetween(const Line line, const Plane &plane1, const Plane &plane2);
 
 }
 

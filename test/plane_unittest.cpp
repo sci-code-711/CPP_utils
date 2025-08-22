@@ -108,7 +108,7 @@ namespace cpp_utils {
         EXPECT_THROW(plane.intersection(line4), value_error);
     }
 
-    TEST(PlaneTest, BetweenTest) {
+    TEST(PlaneTest, IsBetweenTest) {
         Vector point0,
                point1(1, 1, 1),
                point2(1, 0, -1),
@@ -120,12 +120,12 @@ namespace cpp_utils {
 
         Plane plane0, plane1(point1, point1), plane2(point0, point2);
 
-        EXPECT_FALSE(cpp_utils::between(line1, plane0, plane0));
-        EXPECT_TRUE(cpp_utils::between(line2, plane0, plane1));
-        EXPECT_FALSE(cpp_utils::between(line3, plane0, plane1));
-        EXPECT_FALSE(cpp_utils::between(line4, plane0, plane1));
-        EXPECT_FALSE(cpp_utils::between(line0, plane0, plane1));
-        EXPECT_FALSE(cpp_utils::between(line0, plane0, plane2));
+        EXPECT_FALSE(cpp_utils::isBetween(line1, plane0, plane0));
+        EXPECT_TRUE(cpp_utils::isBetween(line2, plane0, plane1));
+        EXPECT_FALSE(cpp_utils::isBetween(line3, plane0, plane1));
+        EXPECT_FALSE(cpp_utils::isBetween(line4, plane0, plane1));
+        EXPECT_FALSE(cpp_utils::isBetween(line0, plane0, plane1));
+        EXPECT_FALSE(cpp_utils::isBetween(line0, plane0, plane2));
     }
 
 }

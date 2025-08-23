@@ -63,71 +63,190 @@ namespace cpp_utils {
         EXPECT_TRUE(line09 == line10);
     }
 
-    TEST(LineTest, NotEqualityTest) {
-
-        Vector vec00,
-               vec01(1, 0, 0), vec02(0, 1, 0), vec03(0, 0, 1),
-               vec04(-1, 0, 0), vec05(0, -1, 0), vec06(0, 0, -1),
-               vec07(1, 1, 1),
-               vec08(-1, 1, 1), vec09(1, -1, 1), vec10(1, 1, -1),
-               vec11(1, -1, -1), vec12(-1, 1, -1), vec13(-1, -1, 1),
-               vec14(-1, -1, -1);
-
-        Line line00,
-             line01(vec04, vec01), line02(vec05, vec02), line03(vec06, vec03),
-             line04(vec01, vec04), line05(vec02, vec05), line06(vec03, vec06),
-             line07(vec14, vec07),
-             line08(vec11, vec08), line09(vec12, vec09), line10(vec13, vec10),
-             line11(vec08, vec11), line12(vec09, vec12), line13(vec10, vec13),
-             line14(vec07, vec14);
-
-        EXPECT_FALSE(line00 != line00);
-        EXPECT_TRUE(line00 != line01);
-        EXPECT_FALSE(line01 != line04);
-        EXPECT_TRUE(line00 != line02);
-        EXPECT_FALSE(line02 != line05);
-        EXPECT_TRUE(line00 != line03);
-        EXPECT_FALSE(line03 != line06);
-        EXPECT_FALSE(line00 != line07);
-        EXPECT_FALSE(line07 != line14);
-        EXPECT_TRUE(line00 != line08);
-        EXPECT_FALSE(line08 != line11);
-        EXPECT_TRUE(line00 != line09);
-        EXPECT_FALSE(line09 != line12);
-        EXPECT_TRUE(line00 != line10);
-        EXPECT_FALSE(line10 != line13);
+    TEST(LineTest, BasicNotEqualityTest) {
+        EXPECT_FALSE(Line() != Line());
+        EXPECT_TRUE(Line() != Line({1, 0, 0}, {0, 3, 6}));
     }
 
-    TEST(LineTest, IsOnTest) {
-        // This is causing the other test failure
-        EXPECT_FALSE(Line({1, 0, 0}, {1, 0, 0}).isOnLine({0, 1, 0}));
+    TEST(LineTest, NotEqualityTest_DirectionChanges) {
+        // Same Line but direction reversal
+        Line line01({0, 0, 0}, {1, 0, 0});
+        Line line02({0, 0, 0}, {-1, 0, 0});
+        EXPECT_FALSE(line01 != line02);
 
-        Vector point0(0, 1, 1);
-        Vector point1(-1, 1, -1);
-        Vector point2(-1, 2, 0);
-        Line line0(point0, point1);
+        Line line02a({0, 0, 0}, {0, 2, 2});
+        Line line02b({0, 0, 0}, {0, -2, -2});
+        EXPECT_FALSE(line02a != line02b);
 
-        Vector point3(1, 0, 1);
-        Vector point4(-1, -1, 1);
-        Vector point5(2, 1, 0);
-        Line line1(point3, point4);
+        Line line02c({0, 0, 0}, {0, -2, 2});
+        Line line02d({0, 0, 0}, {0, 2, -2});
+        EXPECT_FALSE(line02c != line02d);
 
-        Vector point6(1, 1, 0);
-        Vector point7(1, -1, -1);
-        Vector point8(0, 2, 1);
-        Line line2(point6, point7);
+        // same point different direction
+        Line line07({1, 0, 0}, {1, 0, 0});
+        Line line08({1, 0, 0}, {0, 1, 0});
+        EXPECT_TRUE(line07 != line08);
+    }
 
-        EXPECT_TRUE(line0.isOnLine(point0));
-        EXPECT_FALSE(line0.isOnLine(point1));
-        EXPECT_TRUE(line0.isOnLine(point2));
+    TEST(LineTest, NotEqualityTest_PointChanges) {
+        // Different points - same direction - different line
+        Line line03({1, 0, 0}, {1, 0, 0});
+        Line line04({0, 1, 0}, {1, 0, 0});
+        EXPECT_TRUE(line03 != line04);
 
-        EXPECT_TRUE(line1.isOnLine(point3));
-        EXPECT_FALSE(line1.isOnLine(point4));
-        EXPECT_TRUE(line1.isOnLine(point5));
+        // Different points but the same line
+        Line line05({1, 0, 0}, {1, 0, 0});
+        Line line06({0, 0, 0}, {1, 0, 0});
+        EXPECT_FALSE(line05 != line06);
+    }
 
-        EXPECT_TRUE(line2.isOnLine(point6));
-        EXPECT_FALSE(line2.isOnLine(point7));
-        EXPECT_TRUE(line2.isOnLine(point8));
+    TEST(LineTest, NotEqualityTest_Composite) {
+        // different point - reversed direction - same line
+        Line line09({0, 0, 0}, {0, 1, 1});
+        Line line10({0, 2, 2}, {0, -1, -1});
+        EXPECT_FALSE(line09 != line10);
+    }
+
+    TEST(LineTest, IsOnTest_PointChanges) {
+        // Direction {1, -1, 0}
+        Line line0({1, 0, 0}, {1, -1, 0}),
+             line1({0, 1, 0}, {1, -1, 0}),
+             line2({0, 0, 1}, {1, -1, 0});
+
+        EXPECT_TRUE(line0.isOnLine({1, 0, 0}));
+        EXPECT_TRUE(line0.isOnLine({2, -1, 0}));
+        EXPECT_TRUE(line0.isOnLine({0, 1, 0}));
+        EXPECT_FALSE(line0.isOnLine({1, -1, 0}));
+        EXPECT_FALSE(line0.isOnLine({0, 0, 0}));
+
+        EXPECT_TRUE(line1.isOnLine({0, 1, 0}));
+        EXPECT_TRUE(line1.isOnLine({1, 0, 0}));
+        EXPECT_TRUE(line1.isOnLine({-1, 2, 0}));
+        EXPECT_FALSE(line1.isOnLine({1, -1, 0}));
+        EXPECT_FALSE(line1.isOnLine({0, 0, 0}));
+
+        EXPECT_TRUE(line2.isOnLine({0, 0, 1}));
+        EXPECT_TRUE(line2.isOnLine({1, -1, 1}));
+        EXPECT_TRUE(line2.isOnLine({-1, 1, 1}));
+        EXPECT_FALSE(line2.isOnLine({1, -1, 0}));
+        EXPECT_FALSE(line2.isOnLine({0, 0, 0}));
+
+        // Direction {0, 1, -1}
+        Line line3({1, 0, 0}, {0, 1, -1}),
+             line4({0, 1, 0}, {0, 1, -1}),
+             line5({0, 0, 1}, {0, 1, -1});
+
+        EXPECT_TRUE(line3.isOnLine({1, 0, 0}));
+        EXPECT_TRUE(line3.isOnLine({1, 1, -1}));
+        EXPECT_TRUE(line3.isOnLine({1, -1, 1}));
+        EXPECT_FALSE(line3.isOnLine({0, 1, -1}));
+        EXPECT_FALSE(line3.isOnLine({0, 0, 0}));
+
+        EXPECT_TRUE(line4.isOnLine({0, 1, 0}));
+        EXPECT_TRUE(line4.isOnLine({0, 2, -1}));
+        EXPECT_TRUE(line4.isOnLine({0, 0, 1}));
+        EXPECT_FALSE(line4.isOnLine({0, 1, -1}));
+        EXPECT_FALSE(line4.isOnLine({0, 0, 0}));
+
+        EXPECT_TRUE(line5.isOnLine({0, 0, 1}));
+        EXPECT_TRUE(line5.isOnLine({0, 1, 0}));
+        EXPECT_TRUE(line5.isOnLine({0, -1, 2}));
+        EXPECT_FALSE(line5.isOnLine({0, 1, -1}));
+        EXPECT_FALSE(line5.isOnLine({0, 0, 0}));
+
+        // Direction {-1, 0, 1}
+        Line line6({1, 0, 0}, {-1, 0, 1}),
+             line7({0, 1, 0}, {-1, 0, 1}),
+             line8({0, 0, 1}, {-1, 0, 1});
+
+        EXPECT_TRUE(line6.isOnLine({1, 0, 0}));
+        EXPECT_TRUE(line6.isOnLine({0, 0, 1}));
+        EXPECT_TRUE(line6.isOnLine({2, 0, -1}));
+        EXPECT_FALSE(line6.isOnLine({-1, 0, 1}));
+        EXPECT_FALSE(line6.isOnLine({0, 0, 0}));
+
+        EXPECT_TRUE(line7.isOnLine({0, 1, 0}));
+        EXPECT_TRUE(line7.isOnLine({-1, 1, 1}));
+        EXPECT_TRUE(line7.isOnLine({1, 1, -1}));
+        EXPECT_FALSE(line7.isOnLine({-1, 0, 1}));
+        EXPECT_FALSE(line7.isOnLine({0, 0, 0}));
+
+        EXPECT_TRUE(line8.isOnLine({0, 0, 1}));
+        EXPECT_TRUE(line8.isOnLine({-1, 0, 2}));
+        EXPECT_TRUE(line8.isOnLine({1, 0, 0}));
+        EXPECT_FALSE(line8.isOnLine({-1, 0, 1}));
+        EXPECT_FALSE(line8.isOnLine({0, 0, 0}));
+    }
+
+    TEST(LineTest, IsOnTest_DirectionChanges) {
+        // Point {1, -1, 0}
+        Line line0({1, -1, 0}, {1, 0, 0}),
+             line1({1, -1, 0}, {0, 1, 0}),
+             line2({1, -1, 0}, {0, 0, 1});
+
+        EXPECT_TRUE(line0.isOnLine({1, -1, 0}));
+        EXPECT_TRUE(line0.isOnLine({2, -1, 0}));
+        EXPECT_TRUE(line0.isOnLine({0, -1, 0}));
+        EXPECT_FALSE(line0.isOnLine({1, 0, 0}));
+        EXPECT_FALSE(line0.isOnLine({0, 0, 0}));
+
+        EXPECT_TRUE(line1.isOnLine({1, -1, 0}));
+        EXPECT_TRUE(line1.isOnLine({1, 0, 0}));
+        EXPECT_TRUE(line1.isOnLine({1, -2, 0}));
+        EXPECT_FALSE(line1.isOnLine({0, 1, 0}));
+        EXPECT_FALSE(line1.isOnLine({0, 0, 0}));
+
+        EXPECT_TRUE(line2.isOnLine({1, -1, 0}));
+        EXPECT_TRUE(line2.isOnLine({1, -1, 1}));
+        EXPECT_TRUE(line2.isOnLine({1, -1, -1}));
+        EXPECT_FALSE(line2.isOnLine({0, 0, 1}));
+        EXPECT_FALSE(line2.isOnLine({0, 0, 0}));
+
+        // Point {0, 1, -1}
+        Line line3({0, 1, -1}, {1, 0, 0}),
+             line4({0, 1, -1}, {0, 1, 0}),
+             line5({0, 1, -1}, {0, 0, 1});
+
+        EXPECT_TRUE(line3.isOnLine({0, 1, -1}));
+        EXPECT_TRUE(line3.isOnLine({1, 1, -1}));
+        EXPECT_TRUE(line3.isOnLine({-1, 1, -1}));
+        EXPECT_FALSE(line3.isOnLine({1, 0, 0}));
+        EXPECT_FALSE(line3.isOnLine({0, 0, 0}));
+
+        EXPECT_TRUE(line4.isOnLine({0, 1, -1}));
+        EXPECT_TRUE(line4.isOnLine({0, 2, -1}));
+        EXPECT_TRUE(line4.isOnLine({0, 0, -1}));
+        EXPECT_FALSE(line4.isOnLine({0, 1, 0}));
+        EXPECT_FALSE(line4.isOnLine({0, 0, 0}));
+
+        EXPECT_TRUE(line5.isOnLine({0, 1, -1}));
+        EXPECT_TRUE(line5.isOnLine({0, 1, 0}));
+        EXPECT_TRUE(line5.isOnLine({0, 1, -2}));
+        EXPECT_FALSE(line5.isOnLine({0, 0, 1}));
+        EXPECT_FALSE(line5.isOnLine({0, 0, 0}));
+
+        // Point {-1, 0, 1}
+        Line line6({-1, 0, 1}, {1, 0, 0}),
+             line7({-1, 0, 1}, {0, 1, 0}),
+             line8({-1, 0, 1}, {0, 0, 1});
+
+        EXPECT_TRUE(line6.isOnLine({-1, 0, 1}));
+        EXPECT_TRUE(line6.isOnLine({0, 0, 1}));
+        EXPECT_TRUE(line6.isOnLine({-2, 0, 1}));
+        EXPECT_FALSE(line6.isOnLine({1, 0, 0}));
+        EXPECT_FALSE(line6.isOnLine({0, 0, 0}));
+
+        EXPECT_TRUE(line7.isOnLine({-1, 0, 1}));
+        EXPECT_TRUE(line7.isOnLine({-1, 1, 1}));
+        EXPECT_TRUE(line7.isOnLine({-1, -1, 1}));
+        EXPECT_FALSE(line7.isOnLine({0, 1, 0}));
+        EXPECT_FALSE(line7.isOnLine({0, 0, 0}));
+
+        EXPECT_TRUE(line8.isOnLine({-1, 0, 1}));
+        EXPECT_TRUE(line8.isOnLine({-1, 0, 2}));
+        EXPECT_TRUE(line8.isOnLine({-1, 0, 0}));
+        EXPECT_FALSE(line8.isOnLine({0, 0, 1}));
+        EXPECT_FALSE(line8.isOnLine({0, 0, 0}));
     }
 
     TEST(LineTest, WhereOnTest) {

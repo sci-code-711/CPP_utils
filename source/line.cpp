@@ -34,9 +34,9 @@ namespace cpp_utils {
     double Line::whereOnLine(const Vector &that) const {
         Vector vecDiff = that - point;
         double scalarX, scalarY, scalarZ;
-
+        
         if (direction.x == 0) {scalarX = vecDiff.x;} else {scalarX = vecDiff.x / direction.x;}
-        if (direction.y == 0) {scalarY = vecDiff.z;} else {scalarY = vecDiff.y / direction.y;}
+        if (direction.y == 0) {scalarY = vecDiff.y;} else {scalarY = vecDiff.y / direction.y;}
         if (direction.z == 0) {scalarZ = vecDiff.z;} else {scalarZ = vecDiff.z / direction.z;}
 
         if ((scalarX == scalarY && scalarX == scalarZ) ||

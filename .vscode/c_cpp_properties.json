@@ -11,11 +11,10 @@
                 "_UNICODE"
             ],
             "compilerPath": "C:/msys64/mingw64/bin/g++.exe",
-            // Cannot find: C:/msys64/mingw64/bin/g++.exe
-            // Full path of the compiler being used, e.g. /usr/bin/gcc, to enable more accurate IntelliSense.
             "cStandard": "c17",
             "cppStandard": "gnu++17",
-            "intelliSenseMode": "windows-gcc-x64"
+            "intelliSenseMode": "windows-gcc-x64",
+            "configurationProvider": "ms-vscode.cmake-tools"
         }
     ],
     "version": 4
